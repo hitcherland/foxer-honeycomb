@@ -13,6 +13,7 @@
 		</style>
         <script src="js/phaser.min.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/honeycomb.js"></script>
 	</head>
 	<body>
         <script>
@@ -37,11 +38,14 @@
                 height: "100",
                 renderer: Phaser.AUTO,
                 antialias: true,
+                scaleMode: Phaser.ScaleManager.RESIZE,
                 state: {
                     create: create,
                     update: update,
+                    resize: resize,
                 } 
             });
+
         </script>
 	</body>
 </html>
