@@ -1,6 +1,20 @@
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+function preload() {
+    var dataName = getParameterByName( "data" ) || '123';
+    game.load.json( 'data', 'data/' + dataName + '.json' );
+}
 function create() {
     game.time.advancedTiming = true;
-    honeycomb = new Honeycomb( game, Object.values( layout ) );
+    honeycomb = new Honeycomb( game, game.cache.getJSON( 'data' )[ 'letters' ] );
 
     game.input.onDown.add( onDown );
     game.input.onUp.add( onUp );
